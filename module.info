@@ -1,0 +1,3 @@
+name = "dummymodule"
+description = "Dummy module for testing Trace9 Update Manager patches and rollbacks"
+version = "1.0.0"

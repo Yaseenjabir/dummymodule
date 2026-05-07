@@ -1,0 +1,56 @@
+<div style="max-width: 600px; margin: 32px auto; font-family: system-ui, sans-serif;">
+
+  <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 24px;">
+    <div style="background: #1a56db; width: 40px; height: 40px; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-size: 20px;">
+      &#9874;
+    </div>
+    <div>
+      <h1 style="margin: 0; font-size: 20px; font-weight: 700;">Dummy Module</h1>
+      <p style="margin: 0; color: #6b7280; font-size: 13px;">Trace9 Update Manager — Patch Testing</p>
+    </div>
+  </div>
+
+  <!-- Version badge -->
+  <div style="
+    background: #1e3a5f;
+    border: 1px solid #1a56db;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  ">
+    <div>
+      <p style="margin: 0 0 4px; font-size: 12px; color: #93c5fd; text-transform: uppercase; letter-spacing: 0.05em;">Current Version</p>
+      <p style="margin: 0; font-size: 28px; font-weight: 700; color: #fff; font-family: monospace;">
+        v<?= $this->escape($this->version) ?>
+      </p>
+    </div>
+    <div style="text-align: right;">
+      <p style="margin: 0 0 4px; font-size: 12px; color: #93c5fd; text-transform: uppercase; letter-spacing: 0.05em;">Release Note</p>
+      <p style="margin: 0; font-size: 13px; color: #e2e8f0;"><?= $this->escape($this->releaseNote) ?></p>
+    </div>
+  </div>
+
+  <!-- Features list -->
+  <div style="
+    background: #111827;
+    border: 1px solid #374151;
+    border-radius: 8px;
+    padding: 16px 20px;
+  ">
+    <p style="margin: 0 0 12px; font-size: 13px; font-weight: 600; color: #9ca3af; text-transform: uppercase; letter-spacing: 0.05em;">
+      What's in this version
+    </p>
+    <ul style="margin: 0; padding: 0; list-style: none;">
+      <?php foreach ($this->features as $feature): ?>
+      <li style="display: flex; align-items: center; gap: 8px; padding: 6px 0; border-bottom: 1px solid #1f2937; color: #e5e7eb; font-size: 14px;">
+        <span style="color: #34d399; font-size: 16px;">&#10003;</span>
+        <?= $this->escape($feature) ?>
+      </li>
+      <?php endforeach ?>
+    </ul>
+  </div>
+
+</div>

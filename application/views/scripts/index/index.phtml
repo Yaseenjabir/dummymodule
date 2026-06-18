@@ -5,7 +5,7 @@
       &#9874;
     </div>
     <div>
-      <h1 style="margin: 0; font-size: 20px; font-weight: 700;">Dummy Module18</h1>
+      <h1 style="margin: 0; font-size: 20px; font-weight: 700;">Dummy Module19</h1>
       <p style="margin: 0; color: #6b7280; font-size: 13px;">Trace9 Update Manager — Patch Testing</p>
     </div>
   </div>
@@ -24,12 +24,12 @@
     <div>
       <p style="margin: 0 0 4px; font-size: 12px; color: #93c5fd; text-transform: uppercase; letter-spacing: 0.05em;">Current Version</p>
       <p style="margin: 0; font-size: 28px; font-weight: 700; color: #fff; font-family: monospace;">
-        v<?= $this->escape($this->version) ?>
+        v<?php echo $this->escape($this->version) ?>
       </p>
     </div>
     <div style="text-align: right;">
       <p style="margin: 0 0 4px; font-size: 12px; color: #93c5fd; text-transform: uppercase; letter-spacing: 0.05em;">Release Note</p>
-      <p style="margin: 0; font-size: 13px; color: #e2e8f0;"><?= $this->escape($this->releaseNote) ?></p>
+      <p style="margin: 0; font-size: 13px; color: #e2e8f0;"><?php echo $this->escape($this->releaseNote) ?></p>
     </div>
   </div>
 
@@ -47,9 +47,9 @@
       <?php foreach ($this->features as $feature): ?>
       <li style="display: flex; align-items: center; gap: 8px; padding: 6px 0; border-bottom: 1px solid #1f2937; color: #e5e7eb; font-size: 14px;">
         <span style="color: #34d399; font-size: 16px;">&#10003;</span>
-        <?= $this->escape($feature) ?>
+        <?php echo $this->escape($feature) ?>
       </li>
-      <?php endforeach ?>
+      <?php endforeach?>
     </ul>
   </div>
 

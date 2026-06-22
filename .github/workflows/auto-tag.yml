@@ -1,0 +1,56 @@
+# Copy this file into your module repo at:
+#   .github/workflows/auto-tag.yml
+#
+# On every merge to main, this workflow:
+#   1. Reads the latest semver tag (vX.Y.Z) from the repo.
+#   2. Bumps the patch number (v1.2.3 → v1.2.4).
+#   3. Creates a new lightweight tag at HEAD.
+#   4. Pushes the tag — GitHub fires a "create" webhook event that
+#      the Trace9 Update Manager picks up automatically.
+#
+# The workflow needs write access to the repo contents.
+# In Settings → Actions → Workflow permissions, set to "Read and write".
+
+name: Auto-tag on merge to main
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  tag:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # full history needed to read existing tags
+
+      - name: Compute next tag
+        id: next
+        run: |
+          # Get the highest existing vX.Y.Z tag; fall back to v5.0.0
+          LATEST=$(git tag --list 'v[0-9]*.[0-9]*.[0-9]*' | sort -V | tail -1)
+          LATEST=${LATEST:-v5.0.0}
+
+          MAJOR=$(echo "$LATEST" | cut -d. -f1 | tr -d 'v')
+          MINOR=$(echo "$LATEST" | cut -d. -f2)
+          PATCH=$(echo "$LATEST" | cut -d. -f3)
+
+          NEXT_PATCH=$((PATCH + 1))
+          NEXT="v${MAJOR}.${MINOR}.${NEXT_PATCH}"
+
+          echo "latest=$LATEST"
+          echo "next=$NEXT"
+          echo "next=$NEXT" >> "$GITHUB_OUTPUT"
+
+      - name: Create and push tag
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git tag "${{ steps.next.outputs.next }}"
+          git push origin "${{ steps.next.outputs.next }}"
